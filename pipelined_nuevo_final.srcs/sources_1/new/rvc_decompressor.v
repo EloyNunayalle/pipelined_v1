@@ -67,6 +67,40 @@ module rvc_decompressor(
     assign rd_c  = {2'b01, cinstr[4:2]};
     assign rs1_c = {2'b01, cinstr[9:7]};
     assign rs2_c = {2'b01, cinstr[4:2]};
+    
+    // immediatos complicados
+    wire [12:0] imm_cb;
+
+    assign imm_cb = {
+        {4{cinstr[12]}},   // imm[12:9] (extensión de signo)
+        cinstr[12],        // imm[8]
+        cinstr[6],         // imm[7]
+        cinstr[5],         // imm[6]
+        cinstr[2],         // imm[5]
+        cinstr[11],        // imm[4]
+        cinstr[10],        // imm[3]
+        cinstr[4],         // imm[2]
+        cinstr[3],         // imm[1]
+        1'b0               // imm[0]
+    };
+    
+    wire [20:0] imm_cj;
+    
+    assign imm_cj = {
+        {9{cinstr[12]}},   // imm[20:12] (extensión de signo)
+        cinstr[12],        // imm[11]
+        cinstr[8],         // imm[10]
+        cinstr[10],        // imm[9]
+        cinstr[9],         // imm[8]
+        cinstr[6],         // imm[7]
+        cinstr[7],         // imm[6]
+        cinstr[2],         // imm[5]
+        cinstr[11],        // imm[4]
+        cinstr[5],         // imm[3]
+        cinstr[4],         // imm[2]
+        cinstr[3],         // imm[1]
+        1'b0               // imm[0]
+    };
 
     //=========================================================
     // Descompresión
@@ -137,16 +171,11 @@ module rvc_decompressor(
                        
                     3'b001: // c.jal
                         instr_out = {
-                            {9{cinstr[12]}},
-                            cinstr[8],
-                            cinstr[10:9],
-                            cinstr[6],
-                            cinstr[7],
-                            cinstr[2],
-                            cinstr[11],
-                            cinstr[5:3],
-                            cinstr[12],
-                            5'd1,                 // rd = x1 (ra)
+                            imm_cj[20],
+                            imm_cj[10:1],
+                            imm_cj[11],
+                            imm_cj[19:12],
+                            5'd1,              // rd = x1 (ra)
                             7'b1101111
                         };
                         
@@ -250,27 +279,39 @@ module rvc_decompressor(
 
                     3'b101: // c.j
                         instr_out = {
-                            {9{cinstr[12]}},      // imm[20:12]
-                            cinstr[8],            // imm[10]
-                            cinstr[10:9],         // imm[9:8]
-                            cinstr[6],            // imm[7]
-                            cinstr[7],            // imm[6]
-                            cinstr[2],            // imm[5]
-                            cinstr[11],           // imm[4]
-                            cinstr[5:3],          // imm[3:1]
-                            cinstr[12],           // imm[11]
-                            8'd0,                 // rd = x0
-                            7'b1101111
+                            imm_cj[20],        // imm[20]
+                            imm_cj[10:1],      // imm[10:1]
+                            imm_cj[11],        // imm[11]
+                            imm_cj[19:12],     // imm[19:12]
+                            5'd0,              // rd = x0
+                            7'b1101111         // JAL
                         };
                         
-                    3'b110: begin
-                        // c.beqz
-                    end
+                    3'b110: // c.beqz
+                        instr_out = {
+                            imm_cb[12],
+                            imm_cb[10:5],
+                            5'd0,
+                            rs1_c,
+                            3'b000,
+                            imm_cb[4:1],
+                            imm_cb[11],
+                            7'b1100011
+                        };
+                         
 
-                    3'b111: begin
-                        // c.bnez
-                    end
-
+                    3'b111: // c.bnez
+                        instr_out = {
+                            imm_cb[12],
+                            imm_cb[10:5],
+                            5'd0,
+                            rs1_c,
+                            3'b001,
+                            imm_cb[4:1],
+                            imm_cb[11],
+                            7'b1100011
+                        };
+                        
                     default:
                         instr_out = 32'h00000013;
 

@@ -1,0 +1,56 @@
+// Unidad Aritmetico Logica (ALU)
+module alu(
+    input  [31:0] a, b,
+    input  [3:0]  alucontrol,
+    output [31:0] result,
+    output        zero
+);
+
+    wire [31:0] condinvb, sum;
+    wire        v;
+    wire        isSub;
+    wire        isAddSub;
+
+    reg [31:0] result_reg;
+    assign result = result_reg;
+
+    // Solo SUB utiliza complemento a dos
+    assign isSub = (alucontrol == 4'b0001);
+
+    assign condinvb = isSub ? ~b : b;
+    assign sum      = a + condinvb + isSub;
+
+    assign isAddSub =
+        (alucontrol == 4'b0000) ||   // ADD
+        (alucontrol == 4'b0001);     // SUB
+
+    always @* begin
+        case (alucontrol)
+
+            4'b0000: result_reg = sum;                      // add
+            4'b0001: result_reg = sum;                      // sub
+
+            4'b0010: result_reg = a & b;                    // and
+            4'b0011: result_reg = a | b;                    // or
+            4'b0100: result_reg = a ^ b;                    // xor
+
+            4'b0101: result_reg = sum[31] ^ v;             // slt
+
+            4'b0110: result_reg = a << b[4:0];             // sll
+            4'b0111: result_reg = a >> b[4:0];             // srl
+
+            4'b1000: result_reg = $signed(a) >>> b[4:0];   // sra
+
+            default: result_reg = 32'bx;
+
+        endcase
+    end
+
+    assign zero = (result == 32'b0);
+
+    assign v =
+        ~(isSub ^ a[31] ^ b[31]) &
+        (a[31] ^ sum[31]) &
+        isAddSub;
+
+endmodule

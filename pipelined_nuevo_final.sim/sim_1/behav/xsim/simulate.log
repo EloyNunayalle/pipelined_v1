@@ -1,0 +1,12 @@
+Time resolution is 1 ps
+[PIPE] t=25000 | F=01000093 | D=00000000 | E=00000000 | M=00000000 | W=00000000
+[PIPE] t=35000 | F=0000e2e7 | D=01000093 | E=00000000 | M=00000000 | W=00000000
+[PIPE] t=45000 | F=06f08293 | D=0000e2e7 | E=01000093 | M=00000000 | W=00000000
+[PIPE] t=55000 | F=0de08293 | D=06f08293 | E=0000e2e7 | M=01000093 | W=00000000
+[JALR] t=55000  FlushD=1  FlushE=1
+[PIPE] t=65000 | F=06502223 | D=00000000 | E=00000013 | M=0000e2e7 | W=01000093
+[PIPE] t=75000 | F=xxxxxxxx | D=06502223 | E=00000000 | M=00000013 | W=0000e2e7
+[PIPE] t=85000 | F=xxxxxxxx | D=xxxxxxxx | E=06502223 | M=00000000 | W=00000013
+[PIPE] t=95000 | F=xxxxxxxx | D=xxxxxxxx | E=xxxxxxxx | M=06502223 | W=00000000
+[PASS] tb_jalr: salto correcto, retorno correcto y flush observado
+$finish called at time : 95 ns : File "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sim_1/new/tb_jalr.v" Line 88

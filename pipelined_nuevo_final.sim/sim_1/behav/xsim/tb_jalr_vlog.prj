@@ -1,0 +1,28 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/adder.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/alu.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/aludec.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/controller.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/datapath.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/dmem.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/extend.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/flopenr.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/hazard.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/imem.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/maindec.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/mux2.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/mux3.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/new/mux4.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/new/pipeline_reg.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/regfile.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/new/riscvpipelined.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/new/rvc_decompressor.v" \
+"../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" \
+"../../../../pipelined_nuevo_final.srcs/sim_1/new/tb_jalr.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

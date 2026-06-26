@@ -39,5 +39,5 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Usuario/pipelined_nuevo_fi
 INFO: [VRFC 10-311] analyzing module rvc_decompressor
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module top
-INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sim_1/new/tb_jalr.v" into library xil_defaultlib
-INFO: [VRFC 10-311] analyzing module tb_jalr
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sim_1/new/tb_rvc_equivalence1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_rvc_equivalence1

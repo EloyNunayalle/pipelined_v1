@@ -19,7 +19,7 @@ verilog xil_defaultlib  \
 "../../../../pipelined_nuevo_final.srcs/sources_1/new/riscvpipelined.v" \
 "../../../../pipelined_nuevo_final.srcs/sources_1/new/rvc_decompressor.v" \
 "../../../../pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" \
-"../../../../pipelined_nuevo_final.srcs/sim_1/new/tb_jalr.v" \
+"../../../../pipelined_nuevo_final.srcs/sim_1/new/tb_rvc_equivalence1.v" \
 
 # compile glbl module
 verilog xil_defaultlib "glbl.v"

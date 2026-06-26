@@ -4,16 +4,12 @@ module rvc_decompressor(
     output is_compressed
 );
 
-    //=========================================================
-    // Detección de instrucción comprimida
-    //=========================================================
+    // Detección de instruccion comprimida
 
     assign is_compressed = (instr_in[1:0] != 2'b11);
 
-    //=========================================================
     // Campos básicos
-    //=========================================================
-
+    
     wire [15:0] cinstr;
 
     wire [1:0] quadrant;
@@ -23,9 +19,7 @@ module rvc_decompressor(
     assign quadrant = cinstr[1:0];
     assign funct3   = cinstr[15:13];
 
-    //=========================================================
     // Campos de función (según formato RVC)
-    //=========================================================
 
     // Formato CB (SRLI, SRAI, ANDI)
     wire [1:0] cb_funct2;
@@ -33,20 +27,10 @@ module rvc_decompressor(
     // Formato CA (SUB, XOR, OR, AND)
     wire [1:0] ca_funct2;
 
-    // Formato CR (JR, JALR, ADD)
-    wire [3:0] cr_funct4;
-
-    // Formato CA
-    wire [5:0] ca_funct6;
-
     assign cb_funct2 = cinstr[11:10];
     assign ca_funct2 = cinstr[6:5];
-    assign cr_funct4 = cinstr[15:12];
-    assign ca_funct6 = cinstr[15:10];
 
-    //=========================================================
     // Registros normales
-    //=========================================================
 
     wire [4:0] rd;
     wire [4:0] rs1;
@@ -56,9 +40,7 @@ module rvc_decompressor(
     assign rs1 = cinstr[11:7];
     assign rs2 = cinstr[6:2];
 
-    //=========================================================
     // Registros comprimidos (x8-x15)
-    //=========================================================
 
     wire [4:0] rd_c;
     wire [4:0] rs1_c;
@@ -87,7 +69,7 @@ module rvc_decompressor(
     wire [20:0] imm_cj;
     
     assign imm_cj = {
-        {9{cinstr[12]}},   // imm[20:12] (extensión de signo)
+        {9{cinstr[12]}},   // imm[20:12] (extension de signo)
         cinstr[12],        // imm[11]
         cinstr[8],         // imm[10]
         cinstr[10],        // imm[9]
@@ -102,9 +84,7 @@ module rvc_decompressor(
         1'b0               // imm[0]
     };
 
-    //=========================================================
-    // Descompresión
-    //=========================================================
+    // Descompresion
 
     always @* begin
 
@@ -118,9 +98,7 @@ module rvc_decompressor(
 
             case (quadrant)
 
-            //=================================================
             // QUADRANT 0 (C0)
-            //=================================================
 
             2'b00: begin
 
@@ -152,9 +130,7 @@ module rvc_decompressor(
 
             end
 
-            //=================================================
             // QUADRANT 1 (C1)
-            //=================================================
 
             2'b01: begin
 
@@ -319,43 +295,94 @@ module rvc_decompressor(
 
             end
 
-            //=================================================
             // QUADRANT 2 (C2)
-            //=================================================
 
             2'b10: begin
 
                 case (funct3)
 
-                    3'b000: begin
-                        // c.slli
-                    end
+                    3'b000: // c.slli
+                        instr_out = {
+                            7'b0000000,
+                            cinstr[12],
+                            cinstr[6:2],
+                            rd,
+                            3'b001,
+                            rd,
+                            7'b0010011
+                        };
 
-                    3'b010: begin
-                        // c.lwsp
-                    end
+                    3'b010: // c.lwsp
+                        instr_out = {
+                            {4'b0000, cinstr[3:2], cinstr[12], cinstr[6:4], 2'b00},
+                            5'd2,          // rs1 = x2 (sp)
+                            3'b010,
+                            rd,
+                            7'b0000011
+                        };
 
                     3'b100: begin
-
-                        case (cr_funct4)
-
-                            // Aquí luego distinguiremos:
-                            // c.jr
-                            // c.jalr
-                            // c.add
-
-                        endcase
-
+                    
+                        if (cinstr[12] == 1'b0) begin
+                    
+                            if (rs2 == 5'd0) begin
+                                // c.jr
+                                instr_out = {
+                                    12'd0,
+                                    rs1,
+                                    3'b000,
+                                    5'd0,
+                                    7'b1100111
+                                };
+                            end
+                            else begin
+                                // c.mv (no implementado)
+                                instr_out = 32'h00000013;
+                            end
+                    
+                        end
+                        else begin
+                    
+                            if (rd == 5'd0) begin
+                                // c.ebreak (no implementado)
+                                instr_out = 32'h00000013;
+                            end
+                            else if (rs2 == 5'd0) begin
+                                // c.jalr
+                                instr_out = {
+                                    12'd0,
+                                    rs1,
+                                    3'b000,
+                                    5'd1,
+                                    7'b1100111
+                                };
+                            end
+                            else begin
+                                // c.add
+                                instr_out = {
+                                    7'b0000000,
+                                    rs2,
+                                    rd,
+                                    3'b000,
+                                    rd,
+                                    7'b0110011
+                                };
+                            end
+                    
+                        end
+                    
                     end
 
-                    3'b110: begin
-                        // Reservado en RV32
-                    end
-
-                    3'b111: begin
-                        // c.swsp
-                    end
-
+                    3'b110: // c.swsp
+                        instr_out = {
+                            {4'b0000, cinstr[8:7], cinstr[12]},
+                            rs2,
+                            5'd2,          // rs1 = x2 (sp)
+                            3'b010,
+                            {cinstr[11:9], 2'b00},
+                            7'b0100011
+                        };
+                       
                     default:
                         instr_out = 32'h00000013;
 
@@ -363,10 +390,7 @@ module rvc_decompressor(
 
             end
 
-            //=================================================
             // Illegal / Reserved
-            //=================================================
-
             default:
                 instr_out = 32'h00000013;
 

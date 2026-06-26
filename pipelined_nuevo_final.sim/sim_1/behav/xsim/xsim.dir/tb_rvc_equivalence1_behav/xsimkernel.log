@@ -1,0 +1,7 @@
+Running: xsim.dir/tb_rvc_equivalence1_behav/xsimk.exe -simmode gui -wdb tb_rvc_equivalence1_behav.wdb -simrunnum 0 -socket 49947
+Design successfully loaded
+Design Loading Memory Usage: 10188 KB (Peak: 10188 KB)
+Design Loading CPU Usage: 15 ms
+Simulation completed
+Simulation Memory Usage: 11144 KB (Peak: 11144 KB)
+Simulation CPU Usage: 15 ms

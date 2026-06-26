@@ -1,13 +1,13 @@
 Vivado Simulator v2023.1
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
-Running: C:/Xilinx/Vivado/2023.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_jalr_behav xil_defaultlib.tb_jalr xil_defaultlib.glbl -log elaborate.log 
+Running: C:/Xilinx/Vivado/2023.1/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot tb_rvc_equivalence1_behav xil_defaultlib.tb_rvc_equivalence1 xil_defaultlib.glbl -log elaborate.log 
 Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
 Starting simulation data flow analysis
-WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" Line 3. Module top(MEM_FILE="test_jalr.mem") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" Line 3. Module top(MEM_FILE="test_rvc_equivalence1.mem") doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/riscvpipelined.v" Line 3. Module riscvpipelined doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/rvc_decompressor.v" Line 1. Module rvc_decompressor doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/controller.v" Line 2. Module controller doesn't have a timescale but at least one module in design has a timescale.
@@ -33,9 +33,9 @@ WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/pipeline_reg.v" Line 1. Module pipeline_reg(WIDTH=168,FLUSH_VALUE=168'b0) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/mux4.v" Line 1. Module mux4 doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/hazard.v" Line 3. Module hazard doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/imem.v" Line 1. Module imem(MEM_FILE="test_jalr.mem") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/imem.v" Line 1. Module imem(MEM_FILE="test_rvc_equivalence1.mem") doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/dmem.v" Line 1. Module dmem doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" Line 3. Module top(MEM_FILE="test_jalr.mem") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/top.v" Line 3. Module top(MEM_FILE="test_rvc_equivalence1.mem") doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/riscvpipelined.v" Line 3. Module riscvpipelined doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/rvc_decompressor.v" Line 1. Module rvc_decompressor doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/controller.v" Line 2. Module controller doesn't have a timescale but at least one module in design has a timescale.
@@ -61,7 +61,7 @@ WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/pipeline_reg.v" Line 1. Module pipeline_reg(WIDTH=168,FLUSH_VALUE=168'b0) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/new/mux4.v" Line 1. Module mux4 doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/hazard.v" Line 3. Module hazard doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/imem.v" Line 1. Module imem(MEM_FILE="test_jalr.mem") doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/imem.v" Line 1. Module imem(MEM_FILE="test_rvc_equivalence1.mem") doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/Usuario/pipelined_nuevo_final/pipelined_nuevo_final.srcs/sources_1/imports/Src files/dmem.v" Line 1. Module dmem doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
@@ -84,9 +84,9 @@ Compiling module xil_defaultlib.mux4
 Compiling module xil_defaultlib.datapath_default
 Compiling module xil_defaultlib.hazard
 Compiling module xil_defaultlib.riscvpipelined
-Compiling module xil_defaultlib.imem(MEM_FILE="test_jalr.mem")
+Compiling module xil_defaultlib.imem(MEM_FILE="test_rvc_equivale...
 Compiling module xil_defaultlib.dmem
-Compiling module xil_defaultlib.top(MEM_FILE="test_jalr.mem")
-Compiling module xil_defaultlib.tb_jalr
+Compiling module xil_defaultlib.top(MEM_FILE="test_rvc_equivalen...
+Compiling module xil_defaultlib.tb_rvc_equivalence1
 Compiling module xil_defaultlib.glbl
-Built simulation snapshot tb_jalr_behav
+Built simulation snapshot tb_rvc_equivalence1_behav

@@ -335,9 +335,15 @@ module rvc_decompressor(
                                     7'b1100111
                                 };
                             end
-                            else begin
-                                // c.mv (no implementado)
-                                instr_out = 32'h00000013;
+                            else begin // c.mv -> add rd, x0, rs2
+                                instr_out = {
+                                    7'b0000000,   // funct7
+                                    rs2,          // rs2
+                                    5'd0,         // rs1 = x0
+                                    3'b000,       // funct3 = ADD
+                                    rd,           // rd
+                                    7'b0110011    // opcode R-type
+                                };
                             end
                     
                         end

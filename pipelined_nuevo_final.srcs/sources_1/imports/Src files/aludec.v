@@ -24,6 +24,7 @@ module aludec(input  opb5,
                              ALUControl_reg = 4'b0000; // add, addi
                  3'b001:    ALUControl_reg = 4'b0110; // sll/slli
                  3'b010:    ALUControl_reg = 4'b0101; // slt, slti
+                 3'b011:    ALUControl_reg = 4'b1001; // sltu, sltiu  
                  3'b100:    ALUControl_reg = 4'b0100; // xor, xori
                  3'b101:    if (funct7b5)
                                 ALUControl_reg = 4'b1000; // sra/srai

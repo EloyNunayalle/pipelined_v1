@@ -35,6 +35,8 @@ module alu(
             4'b0100: result_reg = a ^ b;                    // xor
 
             4'b0101: result_reg = sum[31] ^ v;             // slt
+            
+            4'b1001: result_reg = ($unsigned(a) < $unsigned(b)) ? 32'd1 : 32'd0; // sltu
 
             4'b0110: result_reg = a << b[4:0];             // sll
             4'b0111: result_reg = a >> b[4:0];             // srl

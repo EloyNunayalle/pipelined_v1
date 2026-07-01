@@ -4,7 +4,7 @@ module imem #(parameter MEM_FILE = "riscvtest.mem") (
 );
 
     // Memoria direccionable por media palabra (16 bits)
-    reg [15:0] RAM [127:0];
+    reg [15:0] RAM [2047:0];
 
     initial
         $readmemh(MEM_FILE, RAM);

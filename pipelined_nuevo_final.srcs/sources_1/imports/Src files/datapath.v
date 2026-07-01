@@ -114,7 +114,7 @@ module datapath(
     wire [31:0] RD1D, RD2D, ImmExtD, ResultW;
     
     regfile rf(
-    .clk(clk), .we3(RegWriteW),
+    .clk(clk), .reset(reset), .we3(RegWriteW),
     .a1(Rs1D), .a2(Rs2D), .a3(RdW),
     .wd3(ResultW),
     .rd1(RD1D), .rd2(RD2D)
